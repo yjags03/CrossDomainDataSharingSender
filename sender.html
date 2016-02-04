@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Cross Domain Data Sharing Sender</title>
+    <script src="js/jquery-2.2.0.min.js"></script>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <button id="btnSend">Send Feedback</button>
+
+    <iframe id="ifrLoad" src="http://localhost:55592/Receiver/Cross-Domain-Data-Sharing-Receiver.html" style="display: none;">
+
+        <p>Oops!. Your browser does not support iframes.</p>
+
+    </iframe>
+    <script>
+        $(document).ready(function () {
+
+            $("#btnSend").on("click", function () {
+                var myIfr = window.frames['ifrLoad'].contentWindow;
+                var message = "An example of cross domain message";
+                myIfr.postMessage(message, 'http://localhost:55592/Receiver/Cross-Domain-Data-Sharing-Receiver.html')
+
+                $.alert.open('Thank you so much for your feedback.' || 'No value has been entered');
+            });
+
+        });
+    </script>
+</body>
+</html>
